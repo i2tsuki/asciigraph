@@ -12,6 +12,8 @@ type Option interface {
 // config holds various graph options
 type config struct {
 	Width, Height int
+	Lower         float64
+	Upper         float64
 	Offset        int
 	Caption       string
 }
@@ -51,6 +53,20 @@ func Height(h int) Option {
 		} else {
 			c.Height = 0
 		}
+	})
+}
+
+// Lower sets the graphs origin bottom.
+func Lower(lower float64) Option {
+	return optionFunc(func(c *config) {
+		c.Lower = lower
+	})
+}
+
+// Upper sets the graphs origin top.
+func Upper(upper float64) Option {
+	return optionFunc(func(c *config) {
+		c.Upper = upper
 	})
 }
 
